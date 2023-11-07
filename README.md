@@ -49,7 +49,9 @@ Projeto ainda em desenvolvimento.
 Projeto pode ser acessado através de qualquer navegador.
 
 ## Testes realizados
-Utilização de imagens e descrição do qeu foi testado.
+<img src="img/PrintTelaLogin.png">
+- Testes:
+-- 
 
 ## Linguagens, dependencias e libs utilizadas 📚
 ![Javascript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black)
