@@ -50,12 +50,14 @@ Projeto pode ser acessado através de qualquer navegador.
 
 ## Testes realizados
 <img src="img/PrintTelaLogin.png">
-### Testes:
+Testes:
 - USUÁRIO NÃO PREENCHE NADA NO CAMPO PARA E-MAIL / USUÁRIO ACIONA O BOTÃO ENTRAR / RESULTADO ESPERADO: USUÁRIO RECEBE MENSAGEM DO SERVIDOR: [EMAIL OU SENHA INCORRETA, TENTE NOVAMENTE]
 
+
 <img src="img/PrintTelaCadastro.png">
-### Testes:
+Testes:
 - USUÁRIO INSERE NOME COMPLETO / USUÁRIO INSERE DATA DE NASCIMENTO INVÁLIDA / USUÁRIO INSERE SEU E-MAIL / USUÁRIO INSERE SUA SENHA E A CONFIRMA NO CAMPO ABAIXO / RESULTADO ESPERADO: USUÁRIO RECEBE MENSAGEM DO SERVIDOR: [PROBLEMA NA CRIAÇÃO DE CONTA, DATA DE NASCIMENTO INVÁLIDA]
+
 
 ## Linguagens, dependencias e libs utilizadas 📚
 ![Javascript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black)
