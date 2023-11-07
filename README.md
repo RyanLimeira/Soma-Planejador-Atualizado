@@ -70,7 +70,7 @@ Projeto pode ser acessado através de qualquer navegador.
 
 📝 Criação de Metas
 
-📝 Exibição Despesas e Metas Criadas
+📝 Exibe Despesas e Metas Criadas
 
 ## Desenvolvedores/Contribuintes:
 - Cauã Vieira
