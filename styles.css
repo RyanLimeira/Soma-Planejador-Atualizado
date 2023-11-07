@@ -1,0 +1,108 @@
+body {
+    font-family: 'Onest', sans-serif;
+    background-color: #77477E;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #03001C;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 60vh;
+    display: block;
+}
+
+.logo-login {
+    width: 5%;
+    border-radius: 50%;
+}
+
+.logo-login img{
+    width: 100px;
+    height: auto;
+}
+
+.cadastro-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+
+h2 {
+    color: #fff;
+}
+
+a {
+    color: #ccc;
+}
+
+p {
+    color: #fff;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #77477E;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+button:hover {
+    color: #fff;
+    background-color: #03001C;
+    transform: scale(1.1);
+}
+
+.signup-link {
+    margin-top: 10px;
+}
+
+.nome-grupo {
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+.mensagem {
+    color: #FF0000;
+    font-weight: bold;
+}
+
+.lista {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.botao-container {
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.botao-container button {
+    margin-left: 10px;
+}

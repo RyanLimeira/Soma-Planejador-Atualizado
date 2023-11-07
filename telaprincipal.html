@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma - Planejador Financeiro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="logo-login"><img src="img/LogoSoma.jpeg"></div>
+    <div class="container">
+        <div class="cadastro-container">
+            <div class="bloco-cadastro">
+                <h2>Cadastrar Metas Financeiras</h2>
+                <input type="number" id="limiteGastos" placeholder="Limite de Gastos no Mês" required>
+                <input type="number" id="economizar" placeholder="Valor a Economizar no Mês" required>
+                <button id="cadastroMetas">Cadastrar</button>
+                <div id="mensagemMetas" class="mensagem"></div>
+            </div>
+            <div id="containerMetas" class="lista"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="cadastro-container">
+            <div class="bloco-cadastro">
+                <h2>Cadastrar Despesas</h2>
+                <input type="text" id="nomeDespesa" placeholder="Nome da Despesa" required>
+                <input type="number" id="valorDespesa" placeholder="Valor da Despesa" required>
+                <button id="cadastroDespesa">Cadastrar</button>
+                <div id="mensagemDespesa" class="mensagem"></div>
+            </div>
+            <div id="containerDespesas" class="lista"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="botao-container">
+            <button id="exibirDespesas">Exibir Despesas</button>
+            <button id="exibirMetas">Exibir Metas Financeiras</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
