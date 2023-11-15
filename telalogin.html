@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soma - Planejador Financeiro</title>
-    <link rel="stylesheet" href="css/stylesCadastro.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;800&display=swap" rel="stylesheet">
@@ -14,10 +14,10 @@
 <body>
     <div class="container">
         <img src="img/LogoSoma.jpeg" class="logo-login" alt="Logo Soma">
-        <form>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Senha" required>
-            <button type="submit">LOGIN</button>
+        <form id="loginForm">
+            <input type="email" placeholder="Email" id="loginEmail" required>
+            <input type="password" placeholder="Senha" id="loginSenha" required>
+            <button type="button" onclick="fazerLogin()">LOGIN</button>
         </form>
         <div class="signup-link">
             <p>Não tem uma conta? <a href="telacadastro.html">Cadastre-se</a></p>
@@ -27,6 +27,51 @@
     <footer class="nome-grupo">
         <p>&copy; 2023 Gaviões Projects.</p>
     </footer>
+
+    <script>
+        /**
+         * Função para realizar o processo de login do usuário.
+         * @function fazerLogin
+         */
+        function fazerLogin() {
+            // Obtém os valores dos campos de email e senha
+            var email = document.getElementById("loginEmail").value;
+            var senha = document.getElementById("loginSenha").value;
+
+            // Faz uma requisição GET para a API de usuários
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://65550e2263cafc694fe761a7.mockapi.io/api/v1/usuario", true);
+
+            // Configura a função de callback para lidar com a resposta da requisição
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // Parseia a resposta JSON para obter a lista de usuários
+                        var usuarios = JSON.parse(xhr.responseText);
+
+                        // Verifica se o usuário e a senha correspondem a algum usuário na lista
+                        var usuarioAutenticado = usuarios.find(function (usuario) {
+                            return usuario.email === email && usuario.senha === senha;
+                        });
+
+                        if (usuarioAutenticado) {
+                            // Se o login for bem-sucedido, redireciona para a tela principal do sistema
+                            window.location.href = "telaPrincipal.html";
+                        } else {
+                            // Se o login falhar, exibe uma mensagem de alerta
+                            alert("Email ou senha incorretos. Por favor, tente novamente.");
+                        }
+                    } else {
+                        // Se houver um erro na requisição, exibe uma mensagem de alerta
+                        alert("Erro ao fazer login. Por favor, tente novamente.");
+                    }
+                }
+            };
+
+            // Envia a requisição
+            xhr.send();
+        }
+    </script>
 </body>
 
 </html>

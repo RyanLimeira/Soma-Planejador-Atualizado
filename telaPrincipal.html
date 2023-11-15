@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma - Planejador Financeiro</title>
+    <link rel="stylesheet" href="css/stylesTelaInicial.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="logo-login"><img src="img/LogoSoma.jpeg"></div>
+
+    <div class="container">
+        <div class="cadastro-container">
+            <div class="bloco-cadastro">
+                <h2>Cadastrar Despesas</h2>
+                <input type="text" id="nomeDespesa" placeholder="Tipo da Despesa" required>
+                <input type="number" id="valorDespesa" placeholder="Valor da Despesa" required>
+                <button id="cadastroDespesa" onclick="cadastrarDespesa()">Cadastrar Despesa</button>
+                <div id="mensagemDespesa" class="mensagem"></div>
+            </div>
+            <div id="containerDespesasCadastro" class="lista"></div>
+
+            <div class="bloco-lista">
+                <h2>Lista de Despesas</h2>
+                <ul id="listaDespesas"></ul>
+                <p>Total: <span id="totalDespesas">0</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="cadastro-container">
+            <div class="bloco-cadastro">
+                <h2>Cadastrar Economia</h2>
+                <input type="text" id="dataEconomia" placeholder="Data" required>
+                <input type="number" id="valorGuardado" placeholder="Valor que deseja Guardar" required>
+                <button id="cadastroEconomia" onclick="cadastrarEconomia()">Cadastrar Economia</button>
+                <div id="mensagemEconomia" class="mensagem"></div>
+            </div>
+            <div id="containerEconomiasCadastro" class="lista"></div>
+
+            <div class="bloco-lista">
+                <h2>Lista de Economias</h2>
+                <ul id="listaEconomias"></ul>
+                <p>Total: <span id="totalEconomias">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <button onclick="irParaTelaLogin()">Sair do sistema</button>
+    </div>
+
+    <footer class="nome-grupo">
+        <p>&copy; 2023 Gaviões Projects.</p>
+    </footer>
+
+    <script>
+        /**
+         * Variáveis globais para armazenar despesas e economias.
+         * @type {Array}
+         */
+        var despesas = [];
+        var economias = [];
+
+        /**
+         * Função para cadastrar uma nova despesa.
+         * @function cadastrarDespesa
+         */
+        function cadastrarDespesa() {
+            var nomeDespesa = document.getElementById("nomeDespesa").value;
+            var valorDespesa = parseFloat(document.getElementById("valorDespesa").value);
+
+            if (!isNaN(valorDespesa)) {
+                despesas.push({ nome: nomeDespesa, valor: valorDespesa });
+                atualizarListaDespesas();
+                calcularTotalDespesas();
+                document.getElementById("nomeDespesa").value = "";
+                document.getElementById("valorDespesa").value = "";
+                document.getElementById("mensagemDespesa").innerText = "Despesa cadastrada com sucesso!";
+                realizarPostAPI(despesas);
+            } else {
+                alert("Por favor, insira um valor válido para a despesa.");
+            }
+        }
+
+        /**
+         * Função para cadastrar uma nova economia.
+         * @function cadastrarEconomia
+         */
+        function cadastrarEconomia() {
+            var dataEconomia = document.getElementById("dataEconomia").value;
+            var valorGuardado = parseFloat(document.getElementById("valorGuardado").value);
+
+            if (!isNaN(valorGuardado)) {
+                economias.push({ data: dataEconomia, valor: valorGuardado });
+                atualizarListaEconomias();
+                calcularTotalEconomias();
+                document.getElementById("dataEconomia").value = "";
+                document.getElementById("valorGuardado").value = "";
+                document.getElementById("mensagemEconomia").innerText = "Economia cadastrada com sucesso!";
+                realizarPostAPI(economias);
+            } else {
+                alert("Por favor, insira um valor válido para a economia.");
+            }
+        }
+
+        /**
+         * Função para atualizar a lista de despesas na interface.
+         * @function atualizarListaDespesas
+         */
+        function atualizarListaDespesas() {
+            var listaDespesas = document.getElementById("listaDespesas");
+            listaDespesas.innerHTML = "";
+
+            despesas.forEach(function (despesa) {
+                var listItem = document.createElement("li");
+                listItem.textContent = despesa.nome + ": R$ " + despesa.valor.toFixed(2);
+                listaDespesas.appendChild(listItem);
+            });
+        }
+
+        /**
+         * Função para calcular o total das despesas e exibir na interface.
+         * @function calcularTotalDespesas
+         */
+        function calcularTotalDespesas() {
+            var total = despesas.reduce(function (acumulador, despesa) {
+                return acumulador + despesa.valor;
+            }, 0);
+
+            document.getElementById("totalDespesas").innerText = total.toFixed(2);
+        }
+
+        /**
+         * Função para atualizar a lista de economias na interface.
+         * @function atualizarListaEconomias
+         */
+        function atualizarListaEconomias() {
+            var listaEconomias = document.getElementById("listaEconomias");
+            listaEconomias.innerHTML = "";
+
+            economias.forEach(function (economia) {
+                var listItem = document.createElement("li");
+                listItem.textContent = "Data: " + economia.data + ", Valor: R$ " + economia.valor.toFixed(2);
+                listaEconomias.appendChild(listItem);
+            });
+        }
+
+        /**
+         * Função para calcular o total das economias e exibir na interface.
+         * @function calcularTotalEconomias
+         */
+        function calcularTotalEconomias() {
+            var total = economias.reduce(function (acumulador, economia) {
+                return acumulador + economia.valor;
+            }, 0);
+
+            document.getElementById("totalEconomias").innerText = total.toFixed(2);
+        }
+
+        /**
+         * Função para realizar uma requisição POST à API de transações.
+         * @function realizarPostAPI
+         * @param {Array} dados - Dados a serem enviados na requisição POST.
+         */
+        function realizarPostAPI(dados) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://65550e2263cafc694fe761a7.mockapi.io/api/v1/transacao", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 201) {
+                    console.log("Dados cadastrados na API com sucesso!");
+                }
+            };
+
+            xhr.send(JSON.stringify(dados));
+        }
+
+        /**
+         * Função para redirecionar o usuário para a tela de login.
+         * @function irParaTelaLogin
+         */
+        function irParaTelaLogin() {
+            window.location.href = "telalogin.html";
+        }
+
+    </script>
+</body>
+</html>

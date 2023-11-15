@@ -8,18 +8,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/stylesCadastro.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     <div class="container">
         <img src="img/LogoSoma.jpeg" class="logo-login" alt="Logo Soma">
-        <form>
+        <form id="cadastroForm">
             <input type="text" placeholder="Nome Completo" id="nome" required>
             <input type="date" placeholder="Data de Nascimento" id="dataNascimento" required>
             <input type="email" placeholder="Email" id="email" required>
             <input type="password" placeholder="Senha" id="senha" required>
-            <button type="button" onclick="realizarCadastro()">CADASTRAR-SE</button>
+            <button type="button" onclick="cadastrarUsuario()">CADASTRAR-SE</button>
         </form>
 
         <div class="signup-link">
@@ -32,45 +32,53 @@
     </footer>
 
     <script>
-        function realizarCadastro() {
-            const nome = document.getElementById('nome').value;
-            const dataNascimento = document.getElementById('dataNascimento').value;
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
+        /**
+         * Função para cadastrar um novo usuário através de uma requisição POST para uma API.
+         * @function cadastrarUsuario
+         */
+        function cadastrarUsuario() {
+            // Obter os valores dos campos do formulário
+            var nome = document.getElementById("nome").value;
+            var dataNascimento = document.getElementById("dataNascimento").value;
+            var email = document.getElementById("email").value;
+            var senha = document.getElementById("senha").value;
 
-            const url = 'https://65550e2263cafc694fe761a7.mockapi.io/api/v1/usuario';
-
-            const dadosUsuario = {
+            // Criar um objeto de usuário com os dados do formulário
+            var usuario = {
                 nome: nome,
                 dataNascimento: dataNascimento,
                 email: email,
                 senha: senha
             };
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dadosUsuario),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro na solicitação: ${response.status}`);
+            // Criar uma nova instância XMLHttpRequest para realizar a requisição
+            var xhr = new XMLHttpRequest();
+            
+            // Configurar a requisição POST para a API de cadastro de usuário
+            xhr.open("POST", "https://65550e2263cafc694fe761a7.mockapi.io/api/v1/usuario", true);
+            
+            // Definir o cabeçalho para indicar que a requisição envia dados JSON
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            // Definir a função de callback para lidar com a resposta da requisição
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 201) {
+                        // Se o usuário foi cadastrado com sucesso, exibir mensagem e redirecionar para a tela de login
+                        alert("Usuário cadastrado com sucesso!");
+                        window.location.href = "telalogin.html";
+                    } else {
+                        // Se houve um erro no cadastro, exibir mensagem de erro
+                        alert("Erro ao cadastrar usuário. Por favor, tente novamente.");
+                    }
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Resposta da API:', data);
+            };
 
-                alert('Cadastro concluído com sucesso!');
-
-                // Redirecionar para a página de login após o cadastro
-                window.location.href = 'telalogin.html';
-            })
-            .catch(error => console.error('Erro:', error));
+            // Enviar a requisição com os dados do usuário em formato JSON
+            xhr.send(JSON.stringify(usuario));
         }
     </script>
+
 </body>
 
 </html>

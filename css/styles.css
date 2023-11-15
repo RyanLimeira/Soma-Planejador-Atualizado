@@ -6,7 +6,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 90vh; /* Ajustado para ocupar a altura total da viewport */
+    min-height: 90vh;
+    overflow-x: hidden;
 }
 
 .container {
@@ -15,14 +16,14 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     text-align: center;
-    width: 90%; /* Definido um tamanho fixo ou percentual para o container */
-    max-width: 650px; /* Adicionado para limitar a largura máxima do container */
-    margin: auto; /* Adicionado para centralizar o container */
+    width: 90%;
+    max-width: 650px;
+    margin: auto;
     overflow-x: hidden;
 }
 
 .logo-login {
-    width: 15%; /* Ajustado o tamanho da logo para 50% */
+    width: 15%;
     border-radius: 30px;
 }
 
@@ -38,7 +39,7 @@ input[type="email"],
 input[type="password"],
 input[type="date"],
 input[type="text"] {
-    width: 90%; /* Alterado para ocupar a largura completa do container */
+    width: 90%;
     padding: 10px;
     margin: 10px 0px;
     border: 1px solid #ccc;
@@ -72,5 +73,5 @@ button:hover {
     padding: 10px;
     position: absolute;
     bottom: 0;
-    width: 100%; /* Ajustado para ocupar a largura completa do container */
+    width: 100%;
 }
