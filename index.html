@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soma - Planejador Financeiro</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/stylesTelaInicial.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;800&display=swap" rel="stylesheet">
@@ -29,22 +29,26 @@
         <div class="cadastro-container">
             <div class="bloco-cadastro">
                 <h2>Cadastrar Despesas</h2>
-                <input type="text" id="nomeDespesa" placeholder="Nome da Despesa" required>
+                <input type="text" id="nomeDespesa" placeholder="Tipo da Despesa" required>
                 <input type="number" id="valorDespesa" placeholder="Valor da Despesa" required>
-                <button id="cadastroDespesa">Cadastrar</button>
+                <button id="cadastroDespesa"> Cadastrar Despesa</button>
                 <div id="mensagemDespesa" class="mensagem"></div>
             </div>
-            <div id="containerDespesas" class="lista"></div>
+            <div id="containerDespesasCadastro" class="lista"></div>
         </div>
     </div>
 
     <div class="container">
-        <div class="botao-container">
+        <div class="cadastro-container">
+        </div>
+        <div class="lista-despesas-container">
+            <h2>Lista de Despesas</h2>
+            <div id="containerDespesas" class="lista"></div>
+            <p id="totalDespesas">Total: R$ 0,00</p>
             <button id="exibirDespesas">Exibir Despesas</button>
-            <button id="exibirMetas">Exibir Metas Financeiras</button>
         </div>
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>

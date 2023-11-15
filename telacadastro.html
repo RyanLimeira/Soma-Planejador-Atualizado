@@ -5,24 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soma - Planejador Financeiro</title>
-    <link rel="stylesheet" href="stylesCadastro.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/stylesCadastro.css">
 </head>
 
 <body>
     <div class="container">
         <img src="img/LogoSoma.jpeg" class="logo-login" alt="Logo Soma">
         <form>
-            <input type="text" placeholder="Nome Completo" required>
-            <input type="date" placeholder="Data de Nascimento" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Senha" required>
-            <input type="password" placeholder="Confirmar Senha" required>
-            <button type="submit">CADASTRAR-SE</button>
+            <input type="text" placeholder="Nome Completo" id="nome" required>
+            <input type="date" placeholder="Data de Nascimento" id="dataNascimento" required>
+            <input type="email" placeholder="Email" id="email" required>
+            <input type="password" placeholder="Senha" id="senha" required>
+            <button type="button" onclick="realizarCadastro()">CADASTRAR-SE</button>
         </form>
-        <div class="signup-link"> <!-- Alterado de login-link para signup-link -->
+
+        <div class="signup-link">
             <p>Já possui uma conta? <a href="telalogin.html">Fazer login.</a></p>
         </div>
     </div>
@@ -30,6 +30,47 @@
     <footer class="nome-grupo">
         <p>&copy; 2023 Gaviões Projects.</p>
     </footer>
+
+    <script>
+        function realizarCadastro() {
+            const nome = document.getElementById('nome').value;
+            const dataNascimento = document.getElementById('dataNascimento').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            const url = 'https://65550e2263cafc694fe761a7.mockapi.io/api/v1/usuario';
+
+            const dadosUsuario = {
+                nome: nome,
+                dataNascimento: dataNascimento,
+                email: email,
+                senha: senha
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dadosUsuario),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro na solicitação: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Resposta da API:', data);
+
+                alert('Cadastro concluído com sucesso!');
+
+                // Redirecionar para a página de login após o cadastro
+                window.location.href = 'telalogin.html';
+            })
+            .catch(error => console.error('Erro:', error));
+        }
+    </script>
 </body>
 
 </html>
